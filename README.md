@@ -1,265 +1,252 @@
-## 学生信息管理系统（第一版）
+## Student Information Management System (Version 1)
 
-### 【实验目的】  
+### [Experimental Objectives]  
 
-1. 综合应用C语言程序设计技术解决实际问题。
-2. 根据给定要求，使用 C 语言设计和实现一个管理系统。
+1. Apply C language programming techniques comprehensively to solve practical problems.
+2. Design and implement a management system using the C language according to given requirements.
 
-### 【实验内容】
+### [Experimental Contents]
 
-1. 设计和实现一个信息类的管理系统（如：学生管理、员工管理，考勤管理， 邮件管理、快递信息管理等，不限于此）。 
-2. 功能至少包括添加信息、删除信息、修改信息、查询信息等。
-3. 可根据自己的设想设计和实现其他更多功能，如排序、数据统计、数据分析、数据筛选、数据可视化等。
-4. 使用菜单与用户交互，程序能够根据用户的选择执行相应的操作。
-5. 能够将信息写入到文件中持久化存储，能够从文件中读取信息。
-6. 使用函数将各个功能模块单独实现。
-7. 程序设计、自定义数据类型、代码结构合理。
-8. 代码中必须完善注释内容，业务逻辑必须正确实现。
-9. 实验报告内容必须包括系统功能描述、程序设计说明、源代码、运行结果截图等。
+1. Design and implement a management system for information categories (such as student management, staff management, attendance management, email management, express information management, etc., not limited to these). 
+2. Functions should include at least adding information, deleting information, modifying information, and querying information.
+3. You can design and implement other more functions according to your own ideas, such as sorting, data statistics, data analysis, data screening, data visualization, etc.
+4. Use a menu to interact with users, and the program can perform corresponding operations according to the user's selection.
+5. Be able to write information into a file for persistent storage and read information from the file.
+6. Use functions to implement each functional module separately.
+7. The program design, custom data types, and code structure should be reasonable.
+8. The code must have complete annotation content, and the business logic must be implemented correctly.
+9. The experimental report must include system function descriptions, program design explanations, source code, screenshots of running results, etc.
 
-#### 一、系统功能描述（分了三个代码文件，如下展示）
+#### I. System Function Descriptions (Shown in three code files as follows)
 
-##### 1、初始化和结束阶段
+##### 1. Initialization and Ending Stages
 
-###### （1）书写在main.c中的代码
+###### (1) Code written in main.c
 
-（a）判断是否第一次进入系统成为校长或者老师的函数：bool FIRST(char p[])；（教师的密码会存储在Secure_Teacher.txt中，校长密码会存储在Secure.txt中）
+(a) A function to determine whether it is the first time to enter the system as a principal or teacher: bool FIRST(char p[]); (The teacher's password will be stored in Secure_Teacher.txt, and the principal's password will be stored in Secure.txt)
 
-（b）对系统进行注销的函数：void Destory()；
+(b) A function to log out of the system: void Destory();
 
-（c）对进入系统身份选择的函数，整个系统必不可少的函数：int main()；
+(c) A function for selecting the identity to enter the system, which is an essential function for the entire system: int main();
 
-###### （2）书写在school.h中的代码
+###### (2) Code written in school.h
 
-（a）定义学生结构体：struct Student{}；
+(a) Define the student structure: struct Student{};
 
-（b）定义一个学生结构体头节点的函数：struct Student* head_;
-								        static int geshu = 0;
-									static void StudentInit()；
+(b) A function to define a student structure head node: struct Student* head_;
+                                        static int geshu = 0;
+                                        static void StudentInit();
 
-定义为静态函数，因为整个系统生命周期只有一个该功能函数。
+It is defined as a static function because there is only one such functional function throughout the system's life cycle.
 
-（c）判断是否有储存学生信息的文件：static void File(int* ge)；
+(c) A function to determine whether there is a file storing student information: static void File(int* ge);
 
-定义为静态函数，因为整个系统生命周期只有一个开始时读取是否有文件的函数。
+It is defined as a static function because there is only one function to read whether there is a file at the start throughout the system's life cycle.
 
-（d）每次退出学生信息管理系统时进行学生链表内存的释放的函数：static void StudentEnd()；
+(d) A function to release the memory of the student linked list each time when exiting the student information management system: static void StudentEnd();
 
-学生结构体中包括：学生的姓名、年龄、性别、学号、数学成绩、英语成绩、语文成绩、总成绩。
+The student structure includes: student's name, age, gender, student number, math score, English score, Chinese score, and total score.
 
-定义为静态函数，因为整个系统生命周期只有一个该功能函数。
+It is defined as a static function because there is only one such functional function throughout the system's life cycle.
 
-（e）定义一个校长结构体：struct Headmaster{};
+(e) Define a principal structure: struct Headmaster{};
 
-##### 2、校长模块
+##### 2. Principal Module
 
-###### （1）校长模块所有功能函数均写在school.h中
+###### (1) All functional functions of the principal module are written in school.h
 
-（a）校长的初始化的函数，校长输入本人的权限密钥，判断是否是真的校长：static void HeadmasterInit()；
+(a) The principal's initialization function, where the principal inputs his/her authority key and determines whether he/she is the real principal: static void HeadmasterInit();
 
-（b）展示校长行政功能的函数：void Administration()；
+(b) A function to display the principal's administrative functions: void Administration();
 
-（c）判断校长进行哪个工作的函数：void oper(int value,int* ge)；
+(c) A function to determine which work the principal will do: void oper(int value, int* ge);
 
-（d）校长进行学生基本信息录入的函数：void hpush(int* ge)；
+(d) A function for the principal to input basic student information: void hpush(int* ge);
 
-（e）校长进行删除学生信息的函数：void hdelete(int* ge)；
+(e) A function for the principal to delete student information: void hdelete(int* ge);
 
-（f）校长查询学生信息的函数：void hFind()；
+(f) A function for the principal to query student information: void hFind();
 
-（g）校长进行学生信息更改的函数：void hChange()、bool Alter(char* c)；
+(g) Functions for the principal to change student information: void hChange(), bool Alter(char* c);
 
-（h）校长进行密码更改的函数：void ChangeSecure(char p[])；
+(h) A function for the principal to change the password: void ChangeSecure(char p[]);
 
-（i）校长显示所有学生信息的函数：void hshow()；
+(i) A function for the principal to display all student information: void hshow();
 
-（j）校长删除所有学生信息的函数：void DeleteAll(int *ge)；
+(j) A function for the principal to delete all student information: void DeleteAll(int *ge);
 
-##### 3、教师模块
+##### 3. Teacher Module
 
-###### （1）教师模块所有功能函数均写在school.h中
+###### (1) All functional functions of the teacher module are written in school.h
 
-（a）教师的初始化的函数，教师输入本人的权限密钥，判断是否是真的教师：static void TeacherInit()；
+(a) The teacher's initialization function, where the teacher inputs his/her authority key and determines whether he/she is the real teacher: static void TeacherInit();
 
-（b）展示教师行政功能的函数：void TeAd()；
+(b) A function to display the teacher's administrative functions: void TeAd();
 
-（c）判断教师进行哪个工作的函数：void Toper(int val)；
+(c) A function to determine which work the teacher will do: void Toper(int val);
 
-（d）教师录入和更改学生成绩的函数：void Tpush(int val)；
+(d) A function for the teacher to input and change student grades: void Tpush(int val);
 
-（e）教师查询学生信息，显示所有学生信息，更改教师密码的函数与校长模块公用一个函数；
+(e) The functions for the teacher to query student information, display all student information, and change the teacher's password are shared with the principal module.
 
-（f）教师进行学生成绩排名的函数：struct Student* merge(struct Student* left, struct Student* right)、struct Student* mergeSort(struct Student* head)、void sortList()；
+(f) Functions for the teacher to rank student grades: struct Student* merge(struct Student* left, struct Student* right), struct Student* mergeSort(struct Student* head), void sortList();
 
-这里运用归并排序，排序效率较快，三个函数具体功能见基本源代码模块的注释。
+Here, merge sort is used, which is more efficient. The specific functions of the three functions can be seen in the comments of the basic source code module.
 
-（g）教师打印学生成绩排名的函数：void PrintGrade(struct Student* m)；
+(g) A function for the teacher to print the student grade ranking: void PrintGrade(struct Student* m);
 
-##### 4、学生模块
+##### 4. Student Module
 
-###### （1）学生模块所有功能函数均写在Student.h中
+###### (1) All functional functions of the student module are written in Student.h
 
-（a）学生进入学生模块时输入学号判断系统内是否存在该学生的函数：static void Student_Oper()；
+(a) A function for the student to input the student number when entering the student module to determine whether the student exists in the system: static void Student_Oper();
 
-（b）学生功能展示的函数：void StudentMemu()；
+(b) A function to display student functions: void StudentMemu();
 
-（c）判断学生进行哪个操作的函数：void Opertor(int val,char ch[])；
+(c) A function to determine which operation the student will perform: void Opertor(int val, char ch[]);
 
-（d）学生查找信息的函数：void FindInformation(char ch[])；
+(d) A function for the student to find information: void FindInformation(char ch[]);
 
-（e）判断学生是否可以更改信息的函数，需要学生进行输入教师权限密钥：void bool_ChangeInformation(char hao[])；
+(e) A function to determine whether the student can change information, requiring the student to input the teacher's authority key: void bool_ChangeInformation(char hao[]);
 
-（f）学生修改信息的函数：void Change_Information(char xuehao[])；
+(f) A function for the student to modify information: void Change_Information(char xuehao[]);
 
-##### 5、其他功能模块
+##### 5. Other Functional Modules
 
-###### （1）均写在Student.h中
+###### (1) All are written in Student.h
 
-（a）文件保存学生信息的函数：void Save(struct Student* s,int ge)；
+(a) A function to save student information in a file: void Save(struct Student* s, int ge);
 
-（b）更改或者删除学生信息时对文件的处理：void Changefile()；
+(b) File processing when changing or deleting student information: void Changefile();
 
-（c）向文件中录入学生成绩排名的函数：void PushGrade(struct Student* m)；
+(c) A function to input the student grade ranking into the file: void PushGrade(struct Student* m);
 
-（e）运用凯撒密码进行简单解密的函数：static void Secure(char p[], int n)；
+(e) A function to perform simple decryption using the Caesar cipher: static void Secure(char p[], int n);
 
-（f）运用凯撒密码进行简单加密的函数：static void Secure2(char p[], int n)；
+(f) A function to perform simple encryption using the Caesar cipher: static void Secure2(char p[], int n);
 
-#### 二、程序设计说明
+#### II. Program Design Explanation
 
-本学生信息管理系统旨在提供一个便捷的平台，用于管理学生的基本信息、成绩以及相关操作，主要分为以下几个模块：
+This student information management system aims to provide a convenient platform for managing students' basic information, grades, and related operations, and is mainly divided into the following modules:
 
-##### 1、系统整体架构
+##### 1. Overall System Architecture
 
-- 系统采用模块化设计，分为初始化和结束阶段、校长模块、教师模块、学生模块以及其他功能模块，每个模块功能相对独立，便于维护和扩展。
-- 通过函数将各个功能模块单独实现，提高了代码的可读性和可复用性。
+- The system adopts a modular design and is divided into initialization and ending stages, principal module, teacher module, student module, and other functional modules. Each module's functions are relatively independent, facilitating maintenance and expansion.
+- Each functional module is implemented separately by functions, improving the code's readability and reusability.
 
-##### 2、数据结构设计
+##### 2. Data Structure Design
 
-- 定义了学生结构体`struct Student`，包含学生的姓名、年龄、性别、学号、数学成绩、英语成绩、语文成绩、总成绩等信息，用于存储学生的详细数据。
-- 采用链表结构来管理学生信息，通过结构体中的指针`st`连接各个学生节点，方便进行信息的添加、删除、修改和查询操作。
+- The student structure `struct Student` is defined, which contains information such as the student's name, age, gender, student number, math score, English score, Chinese score, and total score, used to store students' detailed data.
+- A linked list structure is used to manage student information, and the pointers `st` in the structure connect each student node, facilitating operations such as adding, deleting, modifying, and querying information.
 
-##### 3、功能模块设计
+##### 3. Functional Module Design
 
-- **初始化和结束阶段**
-  - `FIRST`函数用于判断是否为第一次进入系统，若第一次进入，则提示设置校长或教师密码，并进行加密存储。
-  - `Destory`函数实现系统注销功能，需输入校长权限密钥进行验证，成功后删除相关系统文件。
-  - `main`函数作为程序入口，负责初始化学生链表、检测文件、显示菜单并根据用户选择调用相应模块。
-- **校长模块**
-  - `HeadmasterInit`函数用于校长初始化，输入密码并验证，正确则进入校长行政功能界面。
-  - `Administration`函数展示校长行政功能菜单，包括录入、删除、更改、查询信息，显示所有学生信息，删除所有学生信息，更改校长密码，退出系统等操作。
-  - `oper`函数根据校长选择的操作序号调用相应功能函数，如`hpush`（录入信息）、`hdelete`（删除信息）、`hChange`（更改信息）等。
-- **教师模块**
-  - `TeacherInit`函数用于教师初始化，验证密码后进入教师行政功能界面。
-  - `TeAd`函数展示教师行政功能菜单，包括录入学生成绩、更改学生成绩、查询学生信息、显示所有学生信息、学生成绩排名、更改教师密码、退出系统等操作。
-  - `Toper`函数根据教师选择的操作序号调用相应功能函数，如`Tpush`（录入和更改学生成绩）、`hFind`（查询学生信息）、`hshow`（显示所有学生信息）、`sortList`（学生成绩排名）等。
-- **学生模块**
-  - `Student_Oper`函数在学生进入系统时，根据输入的学号判断学生是否存在，若存在则进入学生功能菜单。
-  - `StudentMemu`函数展示学生功能菜单，包括查看信息、更改信息、退出系统等操作。
-  - `Opertor`函数根据学生选择的操作序号调用相应功能函数，如`FindInformation`（查找信息）、`bool_ChangeInformation`（判断是否可更改信息）等。
-- **其他功能模块**
-  - `Save`函数用于将学生信息保存到文件中，确保数据的持久化存储。
-  - `Changefile`函数在更改或删除学生信息时，对文件进行相应处理，保证文件数据的一致性。
-  - `PushGrade`函数将学生成绩排名信息录入文件，方便查看成绩排名情况。
-  - `Secure`和`Secure2`函数分别实现凯撒密码的解密和加密功能，用于密码的安全存储和验证。
+- **Initialization and Ending Stages**
+  - The `FIRST` function is used to determine whether it is the first time to enter the system. If it is the first time, it prompts to set the principal's or teacher's password and stores it in an encrypted manner.
+  - The `Destory` function implements the system logout function, which requires inputting the principal's authority key for verification, and deletes relevant system files upon success.
+  - The `main` function serves as the program entry, responsible for initializing the student linked list, detecting files, displaying menus, and calling corresponding modules according to user selection.
+- **Principal Module**
+  - The `HeadmasterInit` function is used for principal initialization. The principal inputs the password and verifies it. If correct, he/she enters the principal's administrative function interface.
+  - The `Administration` function displays the principal's administrative function menu, including operations such as inputting, deleting, changing, and querying information, displaying all student information, deleting all student information, changing the principal's password, and exiting the system.
+  - The `oper` function calls corresponding functional functions according to the principal's selected operation number, such as `hpush` (inputting information), `hdelete` (deleting information), `hChange` (changing information), etc.
+- **Teacher Module**
+  - The `TeacherInit` function is used for teacher initialization. After verifying the password, the teacher enters the teacher's administrative function interface.
+  - The `TeAd` function displays the teacher's administrative function menu, including operations such as inputting student grades, changing student grades, querying student information, displaying all student information, ranking student grades, changing the teacher's password, and exiting the system.
+  - The `Toper` function calls corresponding functional functions according to the teacher's selected operation number, such as `Tpush` (inputting and changing student grades), `hFind` (querying student information), `hshow` (displaying all student information), `sortList` (ranking student grades), etc.
+- **Student Module**
+  - The `Student_Oper` function, when a student enters the system, determines whether the student exists based on the input student number. If it exists, the student enters the student function menu.
+  - The `StudentMemu` function displays the student function menu, including operations such as viewing information, changing information, and exiting the system.
+  - The `Opertor` function calls corresponding functional functions according to the student's selected operation number, such as `FindInformation` (finding information), `bool_ChangeInformation` (determining whether information can be changed), etc.
+- **Other Functional Modules**
+  - The `Save` function is used to save student information into a file to ensure persistent data storage.
+  - The `Changefile` function performs corresponding processing on the file when changing or deleting student information to ensure file data consistency.
+  - The `PushGrade` function inputs the student grade ranking information into the file to facilitate viewing the grade ranking situation.
+  - The `Secure` and `Secure2` functions implement decryption and encryption functions of the Caesar cipher, respectively, used for secure storage and verification of passwords.
 
-##### 4、文件操作设计
+##### 4. File Operation Design
 
-- 通过`File`函数在系统启动时检测是否存在储存学生信息的文件，若存在则读取文件内容并构建学生链表。
-- 在信息添加、删除、修改等操作后，及时调用`Save`、`Changefile`、`PushGrade`等函数更新文件内容，保证文件与内存中数据的同步。
+- The `File` function detects whether there is a file storing student information when the system starts. If it exists, it reads the file content and constructs the student linked list.
+- After operations such as adding, deleting, and modifying information, the `Save`, `Changefile`, and `PushGrade` functions are called in time to update the file content, ensuring synchronization between the file and the data in memory.
 
-##### 5、密码管理设计
+##### 5. Password Management Design
 
-- 采用凯撒密码对校长和教师密码进行简单加密存储，增加密码的安全性。
-- 在密码验证时，先对输入密码进行解密，再与文件中存储的密码进行比对，确保密码的正确性。
+- The Caesar cipher is used to perform simple encryption on the principal's and teacher's passwords to increase password security.
+- When verifying the password, the input password is decrypted first and then compared with the password stored in the file to ensure password correctness.
 
-##### 6、界面设计
+##### 6. Interface Design
 
-- 运用丰富的ASCII艺术图案和色彩控制代码，为不同模块的菜单界面增添趣味性和辨识度，提升用户体验。
-- 系统在操作过程中，及时给出清晰的提示信息，引导用户进行正确操作，并对错误输入进行友好提示。
+- Rich ASCII art patterns and color control codes are used to add interest and distinguishability to the menu interfaces of different modules, improving the user experience.
+- During the operation of the system, clear prompt information is provided in a timely manner to guide users to perform correct operations, and friendly prompts are given for incorrect inputs.
 
-#### 三、链表储存学生信息的性能分析
+#### III. Performance Analysis of Storing Student Information in Linked List
 
-##### 1. 插入性能
+##### 1. Insertion Performance
 
-- 在链表头部插入新节点时，时间复杂度为$O(1)$，因为只需修改新节点的指针和头节点的指针，无需遍历链表。
-- 在链表中间或尾部插入节点时，时间复杂度为$O(n)$，其中$n$为链表长度。需要遍历链表找到插入位置，平均情况下需要遍历约$n/2$个节点。
+- When inserting a new node at the head of the linked list, the time complexity is $O(1)$ because only the pointers of the new node and the head node need to be modified without traversing the linked list.
+- When inserting a node in the middle or at the end of the linked list, the time complexity is $O(n)$, where $n$ is the length of the linked list. It is necessary to traverse the linked list to find the insertion position, and on average, about $n/2$ nodes need to be traversed.
 
-##### 2. 删除性能
+##### 2. Deletion Performance
 
-- 删除链表头部节点时，时间复杂度为$O(1)$，直接修改头节点指针即可。
-- 删除链表中间或尾部节点时，时间复杂度为$O(n)$。需要先遍历链表找到要删除的节点，平均情况下需要遍历约$n/2$个节点。
+- When deleting the head node of the linked list, the time complexity is $O(1)$, and the head node pointer can be directly modified.
+- When deleting a node in the middle or at the end of the linked list, the time complexity is $O(n)$. It is necessary to traverse the linked list to find the node to be deleted, and on average, about $n/2$ nodes need to be traversed.
 
-##### 3. 查找性能
+##### 3. Search Performance
 
-- 按学号查找学生信息时，最坏情况下时间复杂度为$O(n)$，需要遍历整个链表才能找到目标节点或确定节点不存在。
-- 若链表有序，可采用二分查找等优化策略，但实现相对复杂，且本系统未提及链表有序性，故默认顺序查找。
+- When searching for student information by student number, the worst-case time complexity is $O(n)$, and the entire linked list needs to be traversed to find the target node or determine that the node does not exist.
+- If the linked list is ordered, optimization strategies such as binary search can be adopted, but the implementation is relatively complex, and the system does not mention the orderliness of the linked list, so sequential search is used by default.
 
-##### 4. 内存管理性能
+##### 4. Memory Management Performance
 
-- 链表存储的优点是动态分配内存，能够灵活适应数据量的变化，不需要预先分配大量连续内存空间，避免内存浪费。
-- 然而，频繁的动态内存分配和释放（如插入、删除操作）可能导致内存碎片，影响内存利用率和分配效率。在大规模数据操作时，可能需要考虑内存碎片整理或采用其他内存管理策略。
+- The advantage of linked list storage is that it dynamically allocates memory, can flexibly adapt to changes in data volume, and does not need to pre-allocate a large amount of continuous memory space, avoiding memory waste.
+- However, frequent dynamic memory allocation and release (such as insertion and deletion operations) may lead to memory fragmentation, affecting memory utilization and allocation efficiency. In large-scale data operations, memory fragmentation consolidation or other memory management strategies may need to be considered.
 
-##### 5. 空间性能
+##### 5. Space Performance
 
-- 链表节点除了存储数据本身，还需要额外的指针空间来维护节点之间的连接关系。对于每个学生节点，指针占用一定的内存空间，这在一定程度上增加了内存开销。
-- 相比于数组等连续存储结构，链表在存储稀疏数据或数据量不确定时，可能更节省空间，因为不需要预留大量连续空间。但如果数据量可预先确定且相对稳定，数组可能在空间利用率上更有优势。
+- In addition to storing data itself, the linked list node requires additional pointer space to maintain the connection relationship between nodes. For each student node, the pointer occupies a certain amount of memory space, which increases memory overhead to a certain extent.
+- Compared with continuous storage structures such as arrays, linked lists may save more space when storing sparse data or when the data volume is uncertain because there is no need to reserve a large amount of continuous space. But if the data volume can be determined in advance and is relatively stable, arrays may have advantages in space utilization.
 
-##### 6. 遍历性能
+##### 6. Traversal Performance
 
-- 遍历链表获取所有学生信息时，时间复杂度为$O(n)$，需要依次访问每个节点。遍历过程相对简单，但性能受链表长度影响较大。
+- When traversing the linked list to obtain all student information, the time complexity is $O(n)$, and each node needs to be visited in turn. The traversal process is relatively simple, but the performance is greatly affected by the length of the linked list.
 
-##### 7. 数据更新性能
+##### 7. Data Update Performance
 
-- 更新学生信息时，需要先找到目标节点，时间复杂度为$O(n)$，找到后修改节点数据的时间复杂度为$O(1)$，整体更新操作的时间复杂度主要取决于查找过程。
+- When updating student information, the target node needs to be found first, and the time complexity is $O(n)$. After finding it, the time complexity of modifying the node data is $O(1)$. The overall time complexity of the update operation mainly depends on the search process.
 
-##### 8. 稳定性分析
+##### 8. Stability Analysis
 
-- 链表结构在数据频繁插入和删除的场景下相对稳定，不会像数组那样因大量数据移动而导致性能严重下降。但如果链表过长且内存管理不当，可能出现内存不足或内存碎片化等问题，影响系统稳定性。
+- The linked list structure is relatively stable in scenarios with frequent data insertion and deletion and will not cause a severe performance decline due to large amounts of data movement like arrays. However, if the linked list is too long and memory management is improper, problems such as insufficient memory or memory fragmentation may occur, affecting system stability.
 
-##### 9. 与其他数据结构对比
+##### 9. Comparison with Other Data Structures
 
-- 与数组相比，链表在插入和删除操作上具有优势，特别是在数据量不确定或频繁变动的情况下。但数组在随机访问和内存连续性方面表现更好，对于频繁的查找操作（如果已知索引），数组效率更高。
-- 与二叉搜索树等高级数据结构相比，链表的查找性能较差。二叉搜索树在平衡状态下，查找、插入和删除操作的平均时间复杂度为$O(log n)$，但实现和维护相对复杂。
+- Compared with arrays, linked lists have advantages in insertion and deletion operations, especially when the data volume is uncertain or changes frequently. But arrays perform better in random access and memory continuity. For frequent search operations (if the index is known), arrays are more efficient.
+- Compared with advanced data structures such as binary search trees, the search performance of linked lists is worse. In a balanced state, the average time complexity of search, insertion, and deletion operations of binary search trees is $O(log n)$, but the implementation and maintenance are relatively complex.
 
-##### 10. 待优化方向
+##### 10. Directions for Optimization
 
-- 若经常进行插入和删除操作且对查找性能要求较高，可以考虑使用平衡二叉搜索树或其他更高级的数据结构来替代链表。
-- 对于频繁的查找操作，可考虑建立索引或对链表进行排序以提高查找效率，但排序操作本身也有一定的时间和空间开销，需要根据实际情况权衡。
-- 优化内存管理策略，如定期进行内存碎片整理或采用内存池技术，提高内存利用率和分配效率。
+- If insertion and deletion operations are frequently performed and high search performance is required, balanced binary search trees or other more advanced data structures can be considered to replace the linked list.
+- For frequent search operations, indexing can be considered or the linked list can be sorted to improve search efficiency, but the sorting operation itself also has certain time and space costs and needs to be weighed according to the actual situation.
+- Optimize the memory management strategy, such as regular memory fragmentation consolidation or using memory pool technology to improve memory utilization and allocation efficiency.
 
-综上所述，链表存储学生信息在插入和删除操作的灵活性上具有优势，但查找性能相对较弱，且内存管理和空间利用率方面需要注意。
+In conclusion, storing student information in a linked list has advantages in the flexibility of insertion and deletion operations, but the search performance is relatively weak, and attention should be paid to memory management and space utilization.
 
-#### 四、基本源代码
+#### IV. Basic Source Code
 
-###### （1）main.c代码：
+###### (1) main.c Code:
 
-​	进行基本的菜单的显示，涵盖了学生信息管理系统的数项基本功能，由用户进行功能选择，并进行相应函数的调用。
+    It displays the basic menu, covering several basic functions of the student information management system. The user selects functions, and corresponding functions are called.
+    It detects whether there is a file or not and performs corresponding operations.
+    It determines whether it is the first time to enter the management system and performs corresponding operations.
 
-​	进行文件有无的检测，进行相应的操作
+###### (2) school.h Code
 
-​	进行判断是否是第一次进入管理系统，并进行相应的操作
+    It contains the structures of the school's principal, teachers, and students.
+    It contains various functions of the principal.
+    It contains various functions of the teachers.
+    It contains file input and output functions.
 
-###### （2）school.h代码
 
-​	包含学校的校长，教师，学生的结构体。
+###### (3) Student.h Code
 
-​	包含校长各项功能的函数
-
-​	包含教师各项功能的函数
-
-​	包含文件输入输出的函数
-
-#### 五、运行结果截图
-
-![](./综合实验项目（实验报告8）.assets/屏幕截图 2024-12-25 154640.png)
-
-![](./综合实验项目（实验报告8）.assets/屏幕截图 2024-12-25 154700.png)
-
-![](./综合实验项目（实验报告8）.assets/屏幕截图 2024-12-25 154719.png)
-
-![](./综合实验项目（实验报告8）.assets/屏幕截图 2024-12-25 154749.png)
-
-![](./综合实验项目（实验报告8）.assets/屏幕截图 2024-12-25 154807.png)
-
-![](./综合实验项目（实验报告8）.assets/屏幕截图 2024-12-25 154812.png)
+    It contains three functions of students.
+    It contains functions for the specific implementation of functions.
